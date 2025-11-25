@@ -1,7 +1,7 @@
 import {gemini} from "../index.js"
 
 export const generateMCQs = async (req, res) => {
-const {topic ,count ,difficulty} = req.body;
+const {topic ,count=10 ,difficulty="medium"} = req.body;
 
 if (!topic || !count || !difficulty) {
     return res.status(400).json({ error: "Topic, count, and difficulty All these fields are required." });

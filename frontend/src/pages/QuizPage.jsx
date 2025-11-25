@@ -2,24 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaQuestionCircle, FaBolt, FaBrain } from "react-icons/fa";
 import { motion as Motion } from "framer-motion";
 
-// Minimal fallback data
-const localData = {
-  mcqs: {
-    topic: "Sample Quiz",
-    questions: [
-      {
-        question: "What is React?",
-        options: ["Library", "Framework", "Language", "Runtime"],
-        correctAnswer: "Library",
-      },
-      {
-        question: "Which hook manages state?",
-        options: ["useFetch", "useState", "useCall", "useLogic"],
-        correctAnswer: "useState",
-      },
-    ],
-  },
-};
 
 const QuizPage = () => {
   const [topic, setTopic] = useState("");
@@ -48,18 +30,21 @@ const QuizPage = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/quiz", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-mcqs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic }),
       });
       const data = await res.json();
+      if (!data.success) {
+        showToast(message || "❌ Failed to generate quiz", "error");
+        return;
+      }
       setLoading(false);
-      setQuizData(data.success ? data : localData);
-      showToast(data.success ? "🧠 Quiz generated successfully!" : "❌ Failed to generate quiz", data.success ? "success" : "error");
+      setQuizData(data);
+      showToast("🧠 Quiz generated successfully!","success");
     } catch {
       setLoading(false);
-      setQuizData(localData);
       showToast("❌ Error connecting to server", "error");
     }
   };
@@ -75,7 +60,7 @@ const QuizPage = () => {
 
   // Quiz Display
   if (quizData) {
-    const questions = quizData.mcqs.questions;
+    const questions = quizData.mcqs.questions
     const topicName = quizData.mcqs.topic;
 
     return (
@@ -85,6 +70,7 @@ const QuizPage = () => {
             setQuizData(null);
             setSubmitted(false);
             setAnswers({});
+            setTopic("");
           }}
           className="md:mt-15 px-4 py-2 mt-10 rounded-lg bg-[#0a1a33] border border-blue-900/20 hover:bg-blue-900/20 transition text-sm"
         >
