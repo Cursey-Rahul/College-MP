@@ -4,14 +4,14 @@ import { FaGraduationCap } from "react-icons/fa"; // Example icon from react-ico
 const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-md border-b border-white/5">
-      <div className="w-full mx-auto px-16 py-10 flex items-end justify-between text-white">
+      <div className="w-full mx-auto px-4 py-7 md:px-12 lg:px-16 md:py-10 flex items-end justify-between text-white">
         {/* Left side — logo and title */}
         <div className="flex items-center gap-3">
-          <FaGraduationCap className="text-3xl text-white" />
-          <span className="text-2xl font-semibold tracking-tight pointer-events-none">
+          <FaGraduationCap className=" text-2xl md:text-3xl text-white" />
+          <span className=" text-xl md:text-2xl font-semibold tracking-tight pointer-events-none">
             StudyAI
           </span>
-          <div className="mx-36 hidden md:flex gap-8 text-lg">
+          <div className="lg:mx-36 md:ml-30 hidden md:flex gap-8 text-lg">
           <a
             href="/"
             className="hover:text-gray-300 transition duration-200"
@@ -29,7 +29,7 @@ const Navbar = () => {
 
 
         {/* Right side — login button */}
-        <button className="border-2 border-white px-6 py-2 rounded-full bg-transparent hover:bg-white hover:text-black transition duration-300">
+        <button className=" text-sm lg:text-base border-2 border-white px-6 py-2 rounded-full bg-transparent hover:bg-white hover:text-black transition duration-300">
           Login
         </button>
       </div>

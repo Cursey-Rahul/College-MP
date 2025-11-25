@@ -108,7 +108,7 @@ const PdfPage = () => {
         {/* Back button (fixed) */}
         <button
           onClick={handleBackFromPreview}
-          className="fixed top-36 left-6 px-4 py-2 rounded-full border-2 border-red-400 text-red-400 bg-[#2b0f0f]/60 hover:bg-red-400 hover:text-black transition flex items-center gap-2 z-40 shadow-md"
+          className=" md:mt-10 px-4 py-2 rounded-full border-2 border-red-400 text-red-400 bg-[#2b0f0f]/60 hover:bg-red-400 hover:text-black transition flex items-center gap-2 z-40 shadow-md"
         >
           ← Back
         </button>
@@ -272,7 +272,7 @@ const PdfPage = () => {
       <FaMagic className="absolute top-46 right-32 text-rose-400/30 text-7xl rotate-12 animate-float-rev" />
 
       {/* Header */}
-      <h1 className=" w-full text-6xl font-extrabold text-center mb-4 leading-snug relative bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 animate-shimmer bg-[length:300%_100%]">
+      <h1 className="w-full mt-18 md:mt-0 text-4xl sm:text-6xl font-extrabold text-center mb-4 leading-snug relative bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 animate-shimmer bg-[length:300%_100%]">
         Generate Stunning PDF Notes
       </h1>
 
@@ -304,7 +304,7 @@ const PdfPage = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`relative flex items-center justify-center gap-2 border-2 px-10 py-3 rounded-full text-lg font-semibold overflow-hidden transition duration-300 ${
+          className={`relative flex items-center justify-center gap-2 border-2 md:px-10 px-3 py-3 rounded-full  text-sm md:text-lg font-semibold overflow-hidden transition duration-300 ${
             loading
               ? "border-gray-600 text-gray-400 cursor-not-allowed"
               : "border-white text-white hover:bg-white hover:text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
@@ -323,7 +323,7 @@ const PdfPage = () => {
       </form>
 
       {/* Footer */}
-      <p className="mt-16 text-sm text-gray-500 text-center tracking-wide z-10">
+      <p className="mt-0 sm:mt-16 py-4 text-sm text-gray-500 text-center tracking-wide z-10">
         ✨ Powered by AI — turn any idea into well-structured notes effortlessly.
       </p>
 

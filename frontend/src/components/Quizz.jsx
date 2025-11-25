@@ -6,7 +6,7 @@ const Quizz = () => {
   return (
     <section
       id="quiz"
-      className="relative h-screen w-full flex items-center justify-end bg-black text-white overflow-hidden px-10 md:px-20"
+      className="relative h-screen w-full flex items-center justify-end bg-black text-white overflow-hidden px-10 sm:px-20"
     >
       {/* 🔵 Dotted Glow Background */}
     
@@ -17,23 +17,35 @@ const Quizz = () => {
       <div className="absolute top-1/2 right-1/4 w-[700px] h-[700px] bg-blue-500/25 blur-[150px] rounded-full -translate-y-1/2 z-0"></div>
 
       {/* 🌟 Main Content (Right Side) */}
-      <div className="relative z-10 flex flex-col items-end text-right space-y-8 max-w-5xl">
-        <h2 className="text-6xl font-extrabold leading-tight">
-          Test Your <br />
-          <span className="text-blue-400">Knowledge & Skills</span>
-        </h2>
+  <div className="relative z-10 flex flex-col justify-between 
+                items-start lg:items-end 
+                text-left lg:text-right 
+                space-y-8 w-full max-w-5xl">
 
-        <p className="text-xl text-gray-300 max-w-3xl opacity-90 leading-relaxed">
-          ✨ Challenge yourself with AI-powered quizzes that adapt to your level.
-          Track your progress, unlock achievements, and master every concept with ease.
-        </p>
+  <h2 className="text-3xl sm:text-6xl font-extrabold leading-tight">
+    Test Your <br />
+    <span className="text-blue-400">Knowledge & Skills</span>
+  </h2>
 
-        <button  onClick={() => navigate("/quiz")} className="border-2 border-white text-white px-10 py-3 rounded-full bg-transparent hover:bg-white hover:text-black font-semibold transition duration-300">
-          Start Quiz
-        </button>
-      </div>
-         <div className=" absolute top-10 left-10 h-fit">
-          <img src="/quiz.png" alt="Illustration" className="w-200 h-200 object-contain opacity-90 mask"/>
+  <p className="text-base md:text-lg text-gray-300 max-w-2xl opacity-90 leading-relaxed">
+    ✨ Challenge yourself with AI-powered quizzes that adapt to your level.
+    Track your progress, unlock achievements, and master every concept with ease.
+  </p>
+
+  {/* Button: Left on mobile → Right on lg */}
+  <div className="w-full flex justify-start lg:justify-end">
+    <button
+      onClick={() => navigate("/quiz")}
+      className="text-nowrap text-sm md:text-lg border-2 border-white text-white px-8 py-3 rounded-full bg-transparent hover:bg-white hover:text-black font-semibold transition duration-300"
+    >
+      Start Quiz
+    </button>
+  </div>
+
+</div>
+
+         <div className="absolute top-10 md:left-10 h-fit">
+          <img src="/quiz.png" alt="Illustration" className="w-200 h-200 object-contain opacity-20 xl:opacity-50 2xl:opacity-70 mask"/>
         </div>
     </section>
   );

@@ -83,12 +83,12 @@ const FlashcardsPage = () => {
   if (flashcardsData) {
     const currentCard = flashcardsData.cards[currentIndex];
     return (
-      <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#001a0f] via-[#002b1a] to-[#003322] text-white px-6 relative">
+      <section className="h-screen bg-gradient-to-br from-[#001a0f] via-[#002b1a] to-[#003322] text-white flex flex-col items-center justify-center px-6 md:px-16 pt-28 relative overflow-hidden">
         <div id="toast-container" className="absolute bottom-10 right-10 z-50 space-y-2"></div>
         <FaBookOpen className="absolute top-38 left-20 text-emerald-400/20 text-7xl animate-float-slow" />
       <FaLeaf className="absolute bottom-28 left-40 text-green-300/20 text-6xl animate-float" />
       <FaClone className="absolute top-48 right-32 text-lime-400/20 text-7xl rotate-12 animate-float-rev" />
-        <h1 className="text-4xl h-14 mt-30 w-full md:text-5xl font-extrabold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-lime-300 to-emerald-300 animate-shimmer">
+        <h1 className="text-4xl h-fit md:mt-30 w-full md:text-5xl font-extrabold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-lime-300 to-emerald-300 animate-shimmer">
           Flashcards: {flashcardsData.topic}
         </h1>
 
@@ -119,13 +119,13 @@ const FlashcardsPage = () => {
         <div className="flex justify-between w-full max-w-xl mt-6">
           <button
             onClick={handlePrev}
-            className="flex items-center gap-2 px-6 py-2 rounded-full border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition"
+            className="flex items-center gap-2 px-3 sm:px-6 py-2 rounded-full border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition"
           >
             ← Previous
           </button>
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-6 py-2 rounded-full border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition"
+            className="flex items-center gap-2 px-3 sm:px-6 py-2 rounded-full border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition"
           >
             Next →
           </button>
@@ -137,7 +137,7 @@ const FlashcardsPage = () => {
 
         <button
           onClick={() => setFlashcardsData(null)}
-          className="mt-10 px-6 py-2 border border-green-400 rounded-full hover:bg-green-400 hover:text-black transition"
+          className="my-10 px-6 py-2 border border-green-400 rounded-full hover:bg-green-400 hover:text-black transition"
         >
           ← Back
         </button>
@@ -170,7 +170,7 @@ const FlashcardsPage = () => {
       <FaLeaf className="absolute bottom-28 left-40 text-green-300/20 text-6xl animate-float" />
       <FaClone className="absolute top-48 right-32 text-lime-400/20 text-7xl rotate-12 animate-float-rev" />
 
-      <h1 className="w-full text-6xl font-extrabold text-center mb-4 leading-snug relative bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-lime-300 to-emerald-300 animate-shimmer bg-[length:300%_100%]">
+      <h1 className="w-full mt-18 md:mt-0 text-4xl sm:text-6xl font-extrabold text-center mb-4 leading-snug relative bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-lime-300 to-emerald-300 animate-shimmer bg-[length:300%_100%]">
         Generate Smart Flashcards
       </h1>
       <p className="text-gray-300 text-lg text-center mb-2 max-w-2xl">
@@ -198,7 +198,7 @@ const FlashcardsPage = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`flex items-center justify-center gap-2 border-2 px-10 py-3 rounded-full text-lg font-semibold ${
+          className={`flex items-center justify-center gap-2 border-2 md:px-10 px-3 py-3 rounded-full text-sm md:text-lg font-semibold ${
             loading ? "border-gray-600 text-gray-400 cursor-not-allowed" : "border-white text-white hover:bg-white hover:text-black"
           }`}
         >
@@ -207,7 +207,7 @@ const FlashcardsPage = () => {
         </button>
       </form>
 
-      <p className="mt-16 text-sm text-gray-500 text-center tracking-wide">
+      <p className="mt-0 sm:mt-16 text-sm text-gray-500 text-center tracking-wide">
         🌿 Boost your memory ― study smarter, not harder.
       </p>
 

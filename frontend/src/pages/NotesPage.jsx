@@ -121,7 +121,7 @@ const NotesPage = () => {
         {/* Back button (fixed) */}
         <button
           onClick={handleBackFromPreview}
-          className="fixed top-32 left-6 px-4 py-2 rounded-full border-2 border-purple-400 text-purple-400 bg-[#161021]/60 hover:bg-purple-400 hover:text-black transition flex items-center gap-2 z-40 shadow-md"
+          className="md:mt-10 px-4 py-2  rounded-full border-2 border-purple-400 text-purple-400 bg-[#161021]/60 hover:bg-purple-400 hover:text-black transition flex items-center gap-2 z-40 shadow-md"
         >
           ← Back
         </button>
@@ -315,11 +315,11 @@ const NotesPage = () => {
       <div className="absolute bottom-0 right-0 w-[700px] h-[700px] bg-blue-700/25 blur-[180px] rounded-full -z-10"></div>
 
       {/* 💫 Header */}
-      <h1 className="w-full text-6xl font-extrabold text-center mb-4 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 animate-shimmer bg-[length:300%_100%]">
+      <h1 className="w-full mt-6 md:mt-0 text-4xl sm:text-6xl font-extrabold text-center mb-4 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 animate-shimmer bg-[length:300%_100%]">
         Upload and Analyze Notes
       </h1>
 
-      <p className="text-gray-400 text-lg text-center mb-12 max-w-2xl">
+      <p className="text-gray-400 text-sm sm:text-lg text-center mb-12 max-w-2xl">
         Submit your PDF notes and let AI summarize, organize, and extract key insights.
       </p>
 
@@ -330,11 +330,11 @@ const NotesPage = () => {
       >
         {/* 📂 File Upload Area (FULL CLICKABLE) */}
         <label className="w-full flex flex-col items-center justify-center border-2 border-dashed border-gray-600 rounded-2xl py-10 px-5 cursor-pointer hover:border-purple-500 hover:bg-purple-900/10 transition-all duration-300 text-center">
-          <FaUpload className="text-5xl text-purple-400 mb-3" />
+          <FaUpload className=" text-3xl md:text-5xl text-purple-400 mb-3" />
           {file ? (
             <span className="text-blue-400 font-medium">{file.name}</span>
           ) : (
-            <span className="text-gray-400 hover:text-white text-lg font-medium">
+            <span className="text-gray-400 hover:text-white text-sm md:text-lg font-medium">
               Click anywhere to upload your PDF notes
             </span>
           )}
@@ -350,7 +350,7 @@ const NotesPage = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`flex items-center justify-center gap-3 border-2 px-10 py-3 rounded-full text-lg font-semibold transition duration-300 ${
+          className={`flex items-center justify-center gap-3 border-2  md:px-10 px-3  py-3 rounded-full text-sm md:text-lg font-semibold transition duration-300 ${
             loading
               ? "border-gray-600 text-gray-400 cursor-not-allowed"
               : "border-white text-white hover:bg-white hover:text-black"
@@ -368,7 +368,7 @@ const NotesPage = () => {
       </form>
 
       {/* 🌌 Footer */}
-      <p className="mt-16 text-sm text-gray-500 text-center tracking-wide">
+      <p className="mt-4 md:mt-16 text-sm text-gray-500 text-center tracking-wide">
         ✨ Upload your study material and let AI do the thinking.
       </p>
 

@@ -86,7 +86,7 @@ const QuizPage = () => {
             setSubmitted(false);
             setAnswers({});
           }}
-          className="fixed top-40 left-6 px-5 py-2 rounded-lg bg-[#0a1a33] border border-blue-900/20 hover:bg-blue-900/20 transition text-sm"
+          className="md:mt-15 px-4 py-2 mt-10 rounded-lg bg-[#0a1a33] border border-blue-900/20 hover:bg-blue-900/20 transition text-sm"
         >
           ← Back
         </button>
@@ -168,14 +168,14 @@ const QuizPage = () => {
 <FaBrain className="absolute bottom-28 left-40 text-cyan-400/30 text-9xl animate-float" />
 <FaBolt className="absolute top-32 right-32 text-blue-400/30 text-8xl animate-float-rev" />
 
-      <h1 className="w-full text-6xl font-extrabold text-center mb-4 leading-snug relative bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-cyan-200 to-sky-300 animate-shimmer bg-[length:300%_100%]">
+      <h1 className="w-full mt-6 md:mt-0 text-4xl sm:text-6xl font-extrabold text-center mb-4 leading-snug relative bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-cyan-200 to-sky-300 animate-shimmer bg-[length:300%_100%]">
         Generate Smart Quizzes
       </h1>
 
-      <p className="text-gray-400 text-lg text-center mb-2 max-w-2xl">
+      <p className="text-gray-400 text-sm sm:text-lg text-center mb-2 max-w-2xl">
         Type a topic and let AI craft interactive quizzes to test your understanding.
       </p>
-      <p className="text-cyan-400/60 text-sm text-center mb-12 italic">
+      <p className="text-cyan-400/60 text-xs sm:text-sm text-center mb-12 italic">
         Perfect for revision, learning, or quick knowledge checks.
       </p>
 
@@ -197,7 +197,7 @@ const QuizPage = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`flex items-center justify-center gap-2 border-2 px-10 py-3 rounded-full text-lg font-semibold ${
+          className={`flex items-center justify-center gap-2 border-2  md:px-10 px-3 py-3 rounded-full text-sm md:text-lg  font-semibold ${
             loading ? "border-gray-600 text-gray-400 cursor-not-allowed" : "border-white text-white hover:bg-white hover:text-black"
           }`}
         >
