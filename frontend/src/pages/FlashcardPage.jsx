@@ -2,16 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaBookOpen, FaClone, FaLeaf } from "react-icons/fa";
 import { motion as Motion } from "framer-motion";
 
-// Minimal fallback data
-const localData = {
-  flashcards: {
-    topic: "Sample Topic",
-    cards: [
-      { title: "Dummy Card 1", description: "This is a dummy description." },
-      { title: "Dummy Card 2", description: "Another dummy description." },
-    ],
-  },
-};
 
 const FlashcardsPage = () => {
   const [topic, setTopic] = useState("");
@@ -41,23 +31,26 @@ const FlashcardsPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/flashcards", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-flashcards`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({ contents:topic}),
       });
 
       const data = await res.json();
-      const cards = data.flashcards?.length
-        ? data.flashcards
-        : localData.flashcards.cards;
+      console.log(data);
+      if(!data.success){
+        showToast(data.message, "warning");
+        return
+      }
+      const cards =data.flashcards
+        
 
       setFlashcardsData({ topic, cards });
       showToast("📗 Flashcards generated!", "success");
     } catch (err) {
       console.log("Error fetching flashcards:", err);
-      setFlashcardsData({ topic, cards: localData.flashcards.cards });
-      showToast("⚠️ Server offline → Using dummy flashcards", "warning");
+      showToast("⚠️ Something went wrong ", "warning");
     } finally {
       setLoading(false);
       setCurrentIndex(0);
@@ -77,9 +70,6 @@ const FlashcardsPage = () => {
     );
   };
 
-  // ------------------- RENDER -------------------
-
-  // If flashcards exist → show flashcards display
   if (flashcardsData) {
     const currentCard = flashcardsData.cards[currentIndex];
     return (
@@ -94,17 +84,17 @@ const FlashcardsPage = () => {
 
         {/* Card container */}
         <div
-          className="relative w-full max-w-3xl h-96 md:h-[500px] cursor-pointer perspective"
+          className="relative w-full max-w-3xl h-96 md:h-[550px]  cursor-pointer perspective"
           onClick={() => setFlipped(!flipped)}
         >
           <Motion.div
             animate={{ rotateY: flipped ? 180 : 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
             className="relative w-full h-full"
             style={{ transformStyle: "preserve-3d" }}
           >
             {/* Front */}
-            <div className="absolute w-full h-full bg-[#002015]/90 border border-green-400/20 rounded-3xl flex items-center justify-center p-10 md:p-16 backface-hidden">
+            <div className="absolute w-full h-full bg-[#002015]/90 border border-green-400/20 rounded-3xl flex items-center justify-center p-10 md:p- backface-hidden">
               <p className="text-2xl md:text-4xl font-bold text-center">{currentCard.title}</p>
             </div>
 
