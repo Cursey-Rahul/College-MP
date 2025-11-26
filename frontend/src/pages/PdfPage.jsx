@@ -2,25 +2,23 @@ import React, { useEffect, useState } from "react";
 import { FaBookOpen, FaMagic, FaRegLightbulb } from "react-icons/fa";
 
 
-const API_ENDPOINT = "http://localhost:5000/api/summary"; // <-- change if needed
 
-// Minimal dummy summary (HTML string) used as fallback
-const DUMMY_SUMMARY = "<div>\n  <h2>Introduction to Database Management System (DBMS)</h2>\n  <p>\n    This unit introduces the fundamental concepts of Data, Database, and Database Management Systems (DBMS). It covers the evolution from raw data to meaningful information, the structured storage of data in databases, and the software (DBMS) that facilitates its management, access, and security. Understanding these concepts is crucial for managing and interacting with digital information effectively.\n  </p>\n\n  <h3>What is Data?</h3>\n  <ul>\n    <li><strong>Data:</strong> Raw, unprocessed facts and statistics, either stored or transmitted.\n      <ul>\n        <li><em>Example:</em> IP address, cookies, name, age.</li>\n      </ul>\n    </li>\n    <li><strong>Information:</strong> Data that has been processed and organized, making it meaningful and useful.\n      <ul>\n        <li><em>Example:</em> Analyzing cookie data to determine visitor demographics (e.g., men aged 20-25 visit more).</li>\n      </ul>\n    </li>\n  </ul>\n\n  <h3>What is a Database?</h3>\n  <ul>\n    <li>A <strong>Database</strong> is an organized collection of related data, designed for easy access, management, and updating.</li>\n    <li>Can be software or hardware-based, primarily for data storage.</li>\n    <li>Historically, data was stored on slow, bulky, write-only tapes, leading to the need for better solutions.</li>\n    <li>Larry Ellison (Oracle co-founder) was a pioneer in developing software-based Database Management Systems.</li>\n  </ul>\n\n  <h3>What is DBMS?</h3>\n  <ul>\n    <li>A <strong>Database Management System (DBMS):</strong> Software that enables the creation, definition, and manipulation of databases.</li>\n    <li>Provides an interface or tool for operations like creating databases, storing, updating, and analyzing data, and managing tables.</li>\n    <li>Offers protection and security for databases and maintains data consistency, especially with multiple users.</li>\n    <li><em>Examples:</em> MySQL, Oracle, SQL Server, IBM DB2, PostgreSQL, Amazon SimpleDB.</li>\n  </ul>\n\n  <h3>Characteristics of DBMS</h3>\n  <ul>\n    <li><strong>Data Stored in Tables:</strong> Data is organized into tables within the database, with relationships between tables for meaningful connections.</li>\n    <li><strong>Reduced Redundancy:</strong> DBMS uses <strong>Normalisation</strong> to minimize data repetition, saving storage space.</li>\n    <li><strong>Data Consistency:</strong> Manages and maintains the accuracy and validity of data, even with continuous updates.</li>\n    <li><strong>Support Multiple User and Concurrent Access:</strong> Allows multiple users to perform operations (update, insert, delete) simultaneously while maintaining consistency.</li>\n    <li><strong>Query Language:</strong> Provides a simple language (e.g., SQL) for easy data manipulation (fetch, insert, delete, update).</li>\n    <li><strong>Security:</strong> Protects data from unauthorized access by creating user accounts with different permissions.</li>\n    <li><strong>Transactions Support:</strong> Manages data integrity in applications requiring multi-threading.</li>\n  </ul>\n\n  <h3>Advantages of DBMS</h3>\n  <ul>\n    <li>Segregation of application programs.</li>\n    <li>Minimal data duplication or redundancy.</li>\n    <li>Easy data retrieval using query languages.</li>\n    <li>Reduced development time and maintenance needs.</li>\n    <li>Capability to store vast amounts of data (especially with cloud data centers).</li>\n    <li>Seamless integration with application programming languages.</li>\n  </ul>\n\n  <h3>Disadvantages of DBMS</h3>\n  <ul>\n    <li>Complexity in setup and management.</li>\n    <li>Costly for licensed versions (MySQL is an exception as open-source).</li>\n    <li>Large in size, requiring significant system resources.</li>\n  </ul>\n\n  <h3>History of DBMS Milestones</h3>\n  <ul>\n    <li><strong>1960:</strong> Charles Bachman designed the first DBMS.</li>\n    <li><strong>1970:</strong> Codd introduced IBM’s Information Management System (IMS).</li>\n    <li><strong>1976:</strong> Peter Chen defined the <strong>Entity-Relationship (ER) model</strong>.</li>\n    <li><strong>1980:</strong> Relational Model became widely accepted.</li>\n    <li><strong>1985:</strong> Object-oriented DBMS developed.</li>\n    <li><strong>1990s:</strong> Object-orientation incorporated into relational DBMS.</li>\n    <li><strong>1991:</strong> Microsoft shipped MS Access, dominating personal DBMS.</li>\n    <li><strong>1995:</strong> First Internet database applications emerged.</li>\n    <li><strong>1997:</strong> XML applied to database processing, leading to integration into DBMS products.</li>\n  </ul>\n\n  <h3>Database Model</h3>\n  <ul>\n    <li>A <strong>Database Model</strong> illustrates the logical structure of a database, including relationships and constraints for data storage and access.</li>\n    <li>Models are based on broader data model rules and concepts, often represented by a database diagram.</li>\n  </ul>\n\n  <h3>Types of Database Models</h3>\n  <ul>\n    <li><strong>Relational Model (Most Common):</strong>\n      <ul>\n        <li>Sorts data into <strong>tables</strong> (relations), composed of columns and rows.</li>\n        <li>Each column represents an <strong>attribute</strong> (e.g., price, zip code).</li>\n        <li>A <strong>primary key</strong> (unique identifier) is chosen, which can be a <strong>foreign key</strong> in other tables to establish relationships.</li>\n        <li>Each row (tuple) contains data for a specific instance of the entity.</li>\n        <li>Accounts for relationships like one-to-one, one-to-many, and many-to-many.</li>\n      </ul>\n    </li>\n    <li><strong>Hierarchical Model:</strong>\n      <ul>\n        <li>Organizes data in a tree-like structure with a single parent or root for each record.</li>\n        <li>Sibling records are sorted, defining the physical storage order.</li>\n        <li>Good for describing real-world \"one-to-many\" relationships.</li>\n        <li>Primarily used by IBM’s IMS in the 60s and 70s, rarely seen today due to inefficiencies.</li>\n      </ul>\n    </li>\n    <li><strong>Network Model:</strong>\n      <ul>\n        <li>Builds on the hierarchical model, allowing many-to-many relationships (multiple parent records).</li>\n        <li>Based on mathematical set theory, structured with sets of related records (owner/parent and member/child records).</li>\n        <li>A record can be a child in multiple sets, enabling complex relationships.</li>\n        <li>Popular in the 70s after being defined by CODASYL.</li>\n      </ul>\n    </li>\n    <li><strong>Object-Oriented Database Model:</strong>\n      <ul>\n        <li>Defines a database as a collection of <strong>objects</strong> (reusable software elements) with features and methods.</li>\n        <li>Examples:\n          <ul>\n            <li><strong>Multimedia database:</strong> Stores media like images not suitable for relational databases.</li>\n            <li><strong>Hypertext database:</strong> Allows any object to link to any other object, useful for disparate data but not numerical analysis.</li>\n          </ul>\n        </li>\n        <li>Considered a post-relational or <strong>hybrid database model</strong> as it incorporates and extends beyond tables.</li>\n      </ul>\n    </li>\n    <li><strong>Entity-Relationship (ER) Model:</strong>\n      <ul>\n        <li>Captures relationships between real-world <strong>entities</strong> (people, places, things) and their <strong>attributes</strong>.</li>\n        <li>Focuses on conceptual database design rather than physical structure.</li>\n        <li>Maps <strong>cardinality</strong> (relationships) between entities.</li>\n        <li>A common form is the <strong>star schema</strong>, where a central fact table connects to multiple dimensional tables.</li>\n      </ul>\n    </li>\n    <li><em>Other Models:</em> Document model, Entity-attribute-value model, Star schema, Object-relational model.</li>\n  </ul>\n\n  <h3>What is Data Independence?</h3>\n  <ul>\n    <li><strong>Data Independence:</strong> A DBMS property allowing changes to the database schema at one level without affecting the schema at the next higher level.</li>\n    <li>Keeps data separate from programs that use it.</li>\n  </ul>\n\n  <h3>Types of Data Independence</h3>\n  <ol>\n    <li><strong>Physical Data Independence:</strong>\n      <ul>\n        <li>Separates the conceptual level from the internal/physical levels.</li>\n        <li>Allows changing physical storage structures or devices without affecting the conceptual schema.</li>\n        <li>Easier to achieve than logical independence.</li>\n        <li><em>Examples of changes that don't affect the conceptual layer:</em> Using new storage devices, modifying file organization, switching data structures, changing access methods, modifying indexes, altering compression techniques, changing database location.</li>\n      </ul>\n    </li>\n    <li><strong>Logical Data Independence:</strong>\n      <ul>\n        <li>Ability to change the conceptual schema without altering external views, APIs, or programs.</li>\n        <li>More challenging to achieve than physical independence.</li>\n        <li><em>Examples of changes that don't affect the external layer:</em> Adding/modifying/deleting attributes, entities, or relationships; merging records; breaking records into multiple parts.</li>\n      </ul>\n    </li>\n  </ol>\n  <p>\n    <strong>Difference:</strong> Physical independence deals with changes to the storage details, while logical independence deals with changes to the conceptual structure visible to applications.\n  </p>\n\n  <h3>Database Architecture</h3>\n  <ul>\n    <li>A <strong>Database Architecture</strong> is a representation of the DBMS design, aiding in designing, developing, implementing, and maintaining the system.</li>\n    <li>Divides the database system into independent, modifiable components.</li>\n    <li>Choosing the correct architecture ensures efficient data management.</li>\n  </ul>\n\n  <h3>Types of DBMS Architecture</h3>\n  <ol>\n    <li><strong>1-Tier Architecture (Single Tier):</strong>\n      <ul>\n        <li>Client, server, and database all reside on the same machine.</li>\n        <li>Simplest form, primarily used for local practice (e.g., installing a database on your PC).</li>\n        <li>Rarely used in production environments.</li>\n      </ul>\n    </li>\n    <li><strong>2-Tier Architecture:</strong>\n      <ul>\n        <li>Presentation layer runs on a client (PC, mobile), and data is stored on a separate server (second tier).</li>\n        <li>Provides added security as the DBMS is not directly exposed to end-users.</li>\n        <li>Offers direct and faster communication between client and server.</li>\n        <li><em>Example:</em> A Contact Management System using MS-Access where the client application connects directly to the database server.</li>\n      </ul>\n    </li>\n    <li><strong>3-Tier Architecture (Most Popular):</strong>\n      <ul>\n        <li>An extension of 2-tier, separating functional processes, logic, data access, storage, and user interface into independent modules.</li>\n        <li>Consists of three layers:\n          <ol>\n            <li><strong>Presentation Layer:</strong> User interface (e.g., PC, tablet).</li>\n            <li><strong>Application Layer (Business Logic Layer):</strong> Resides between the user and DBMS. Processes user requests, functional logic, constraints, and rules before communicating with the DBMS or user.</li>\n            <li><strong>Database Server:</strong> Stores and manages data.</li>\n          </ol>\n        </li>\n      </ul>\n    </li>\n  </ol>\n\n  <h3>Three Schema Architecture (ANSI/SPARC Architecture)</h3>\n  <ul>\n    <li>A framework to describe the structure of a specific database system, separating user applications from the physical database.</li>\n    <li>Comprises three levels:</li>\n    <ol>\n      <li><strong>Internal Level (Physical Schema):</strong>\n        <ul>\n          <li>Describes the physical storage structure of the database.</li>\n          <li>Uses a physical data model, defining how data is stored in blocks.</li>\n          <li>Details complex low-level data structures.</li>\n        </ul>\n      </li>\n      <li><strong>Conceptual Level (Logical Level):</strong>\n        <ul>\n          <li>Describes the overall design/structure of the entire database.</li>\n          <li>Defines what data is stored and the relationships among that data.</li>\n          <li>Hides internal details like data structure implementation.</li>\n          <li>Database administrators and programmers typically work at this level.</li>\n        </ul>\n      </li>\n      <li><strong>External Level (View Schema/Subschema):</strong>\n        <ul>\n          <li>Contains multiple schemas (subschemas), each describing a specific view of the database.</li>\n          <li>Describes the portion of the database a particular user group is interested in, hiding the rest.</li>\n          <li>Defines the end-user's interaction with the database system.</li>\n        </ul>\n      </li>\n    </ol>\n    <li><strong>Mapping:</strong> Used to transform requests and responses between these architectural levels (e.g., External/Conceptual mapping, Conceptual/Internal mapping). This process can add overhead for small DBMS.</li>\n  </ul>\n</div>";
+
 
 const PdfPage = () => {
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // previewHtml: when non-null -> render the PDF-like viewer (replaces the default UI)
+  
   const [previewHtml, setPreviewHtml] = useState(null);
-  const [previewTitle, setPreviewTitle] = useState(""); // optional title to display
+  const [previewTitle, setPreviewTitle] = useState(""); 
   const [error, setError] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // toast helper (same as your earlier implementation)
+  
   const showToast = (message, type = "info") => {
     const toastContainer = document.getElementById("toast-container");
     if (!toastContainer) return;
@@ -35,7 +33,7 @@ const PdfPage = () => {
     }, 3000);
   };
 
-  // Submit handler: POST topic, set previewHtml on success, fallback to dummy
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -48,46 +46,38 @@ const PdfPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(API_ENDPOINT, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({contents: topic }),
       });
 
-      // try to parse JSON; if server returns error will throw
+      
       const data = await res.json().catch(() => null);
-
-      // if server response valid and has summary HTML -> use it
-      if (data && data.success && typeof data.summary === "string" && data.summary.trim()) {
-        setPreviewHtml(data.summary);
-        // try to extract a <h2> or use topic as title
+if(!data.success){
+  showToast(message || "❌ Failed to generate summary", "error");
+  return
+}
+      
+        setPreviewHtml(data.notes);
+        
         const tmp = document.createElement("div");
-        tmp.innerHTML = data.summary;
-        const h2 = tmp.querySelector("h2");
-        setPreviewTitle(h2 ? h2.textContent : topic);
+        tmp.innerHTML = data.notes;
+        const h1 = tmp.querySelector("h1");
+        setPreviewTitle(h1? h1.textContent:"")
         showToast("📘 Summary generated successfully", "success");
-      } else {
-        // fallback to dummy
-        setPreviewHtml(DUMMY_SUMMARY);
-        setPreviewTitle(topic || "Summary Preview");
-        showToast("⚠️ No valid summary from server — showing dummy preview", "warning");
-      }
+      
     } catch (err) {
       console.error(err);
-      setPreviewHtml(DUMMY_SUMMARY);
-      setPreviewTitle(topic || "Summary Preview");
-      setError("Server error - showing dummy preview");
-      showToast("❌ Error connecting to server — showing dummy preview", "error");
+      showToast("❌ Error connecting to server", "error");
     } finally {
       setLoading(false);
-      // clear input to match prior behavior (optional)
       setTopic("");
-      // scroll to top so preview is visible
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  // Back from preview -> clear previewHtml and show the original UI again
+  
   const handleBackFromPreview = () => {
     setPreviewHtml(null);
     setPreviewTitle("");
@@ -95,7 +85,7 @@ const PdfPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ---------- When previewHtml exists -> render the PDF-like view (mutually exclusive) ----------
+  
   if (previewHtml) {
     return (
       <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-red-950 to-rose-950 text-white px-6 md:px-16 pt-28 relative overflow-auto">
@@ -104,7 +94,7 @@ const PdfPage = () => {
       <FaMagic className="absolute top-46 right-32 text-rose-400/30 text-7xl rotate-12 animate-float-rev" />
         {/* toast container (keep) */}
         <div id="toast-container" className="absolute top-50 toast toast-bottom toast-end z-50 space-y-2"></div>
-
+<div className="w-full flex items-center px-14">
         {/* Back button (fixed) */}
         <button
           onClick={handleBackFromPreview}
@@ -115,9 +105,9 @@ const PdfPage = () => {
 
         {/* Page header */}
         <h1 className="w-full mt-3 text-4xl md:text-5xl font-extrabold text-center mb-8 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 animate-shimmer">
-          Notes: {previewTitle || "Summary"}
+          Notes: {previewTitle || ""}
         </h1>
-
+</div>
         {/* PDF-like container */}
         <div className="w-full max-w-4xl p-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30"
              style={{ minHeight: "65vh", boxShadow: "0 20px 60px rgba(0,0,0,0.6)" }}>
@@ -150,7 +140,7 @@ const PdfPage = () => {
       shadow-[0_8px_30px_rgba(0,0,0,0.12)]
       border border-gray-200/70
       animate-fadeIn
-      ml-1   /* shifts content so stripe doesn’t overlap */
+      ml-1  
     "
     style={{
       maxHeight: "calc(65vh - 60px)",
@@ -175,29 +165,28 @@ const PdfPage = () => {
   }
   .animate-fadeIn { animation: fadeIn 0.4s ease-out; }
 
-  .prose h1, .prose h2, .prose h3 {
+  .prose h6 , .prose h2, .prose h3,.prose h4 ,.prose h5  {
     font-weight: 700;
     letter-spacing: -0.5px;
+    color:black;
   }
-
-  .prose h2 {
+ .prose strong {
+    color: black !important;
+  }
+  .prose h1 {
     color: #b91c1c;
     border-bottom: 2px solid #fca5a5;
     padding-bottom: 4px;
     margin-top: 1rem;
   }
 
-  .prose h3 {
-    color: #dc2626;
-    margin-top: 0.75rem;
-  }
+  
 
   .prose ul li::marker { color: #ef4444; }
-
   .prose blockquote {
     border-left: 4px solid #ef4444;
     padding-left: 1rem;
-    color: #444;
+    color: black;
     font-style: italic;
   }
 
@@ -231,7 +220,7 @@ const PdfPage = () => {
         <style>{`
           @keyframes shimmer { 0% { background-position: -100% 0; } 100% { background-position: 100% 0; } }
           .animate-shimmer { animation: shimmer 6s linear infinite; background-size: 300% 100%; }
-          /* basic typography for server HTML (you can customize) */
+         
           .prose h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
           .prose h3 { font-size: 1.125rem; margin-top: 0.75rem; }
           .prose p, .prose li { color: #111827; line-height: 1.6; }
@@ -254,7 +243,7 @@ const PdfPage = () => {
     );
   }
 
-  // ---------- Default UI (input form) ----------
+  
   return (
     <section className="h-screen bg-gradient-to-br from-black via-red-950 to-rose-950 text-white flex flex-col items-center justify-center px-6 md:px-16 pt-28 relative overflow-hidden">
       {/* 🧃 Toast Container */}
@@ -279,8 +268,11 @@ const PdfPage = () => {
       <p className="text-gray-400 text-lg text-center mb-2 max-w-2xl">
         Type a topic and let AI transform it into structured, concise study notes.
       </p>
-      <p className="text-red-400/80 text-sm text-center mb-12 italic">
+      <p className="text-red-400/80 text-sm text-center mb-2 italic">
         Perfect for students, researchers, and quick learners.
+      </p>
+      <p className="text-gray-300 text-sm text-center mb-12 italic">
+      Enter whole unit/chapter topic and subtopics or entire syllabus for better results
       </p>
 
       {/* Input Form */}
@@ -320,6 +312,9 @@ const PdfPage = () => {
             </>
           )}
         </button>
+       {loading&& <p className="text-gray-300 text-sm text-center italic">
+          please wait for around 2 minutes your notes are being generated
+      </p>}
       </form>
 
       {/* Footer */}

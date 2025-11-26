@@ -606,7 +606,7 @@ IMPORTANT NOTE:- one more very important thing dont be afraid to generate long s
 Output Format Example:
 
 <div>
-  <h2>Summary</h2>
+  <h1>Summary</h1>
   <p>Short paragraph summarizing the content.</p>
 
   <h3>Key Concepts</h3>
@@ -651,13 +651,7 @@ res.status(200).json({success:false, message: "summary cannot be generated from 
 
 
 export const generateNotes = async (req, res) => {
-//  let contents=`
-// UNIT-IV
-// HTML: use of commenting, headers, text styling, images, formatting text with <FONT>, special
-// characters, horizontal rules, line breaks, table, forms, image maps, <META> tags,
-// <FRAMESET> tags, file formats including image formats.
-//   `
-let contents=`hows weather today.`
+let contents= req.body.contents;
     try {
     const systemInstruction=`You are an AI notes generator that creates extremely detailed and exhaustive study notes based on a provided topic, syllabus, or unit. The output must be structured in clean, semantic HTML suitable for direct rendering and safe conversion into a PDF without any layout breaking.
 
@@ -673,10 +667,10 @@ CORE RULES (Follow Strictly):
    - Never include scrollable elements, tables that overflow, or layouts requiring horizontal scrolling.
 
 2. HTML Formatting Rules:
-   -ONly and only Allowed tags: <h1>, <h2>, <h3>, <h4>, <p>, <ul>, <ol>, <li>, <strong>, <em>,<br>, <span>, <div>, and <code>.
-   -dont use any <a> tag or any kind of link tag
+   -ONly and only Allowed tags: <h1>, <h2>, <h3>, <h4>, <p>, <ul>, <ol>, <li>, <strong>, <em>,<br>, <span>, <div>
+   -dont use any <a> tag or any kind of link tag and also code tag is also prohibited
    -use of <pre> tag for anything is also prohibited use only and only allowed tags given above
-   -For giving the examples such as writing <h1> or <p> use &lt;h1&gt; or &lt;p&gt; to represent them do not use actual tags
+   -For giving the examples such as writing <h1> or <p> use &lt;h1&gt; or &lt;p&gt; but this is only for giving HTML examples do not use it for the actual content that has to be rendered 
    - You may use simple inline CSS only in the **style="" attribute** and ONLY for readability (e.g., margin, padding, font-size, line-height, bold). Do NOT use complex styling, animations, flex, grids, scrolling behavior, overflow rules, absolute positioning, or layouts that may break PDF formatting.
    - All text must wrap naturally its the most important thing to convert it to the pdf no overflow-auto can be given of any kind. No element should be wide enough to require horizontal scrolling.
 
@@ -707,7 +701,7 @@ CORE RULES (Follow Strictly):
 STRUCTURE REFERENCE (Follow style, not wording):
 
 <div id="notes">
-  <h1>Topic Title</h1>
+  <h1>Topic Title</h1>   
   <nav>
     <ul>
       <li>1. Subtopic One</li>
