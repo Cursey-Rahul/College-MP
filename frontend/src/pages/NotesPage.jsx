@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useRef, useState } from "react";
 import { FaFilePdf, FaUpload, FaBrain, FaDownload } from "react-icons/fa";
 import {extractTextFromPDF} from "../lib/extractPDF"
-
-
-
-
 
 const NotesPage = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-
+const contentRef=useRef();
   
-  const [previewHtml, setPreviewHtml] = useState(null);
+  const [previewHtml, setPreviewHtml] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [error, setError] = useState(null);
 
@@ -128,26 +124,99 @@ if(!data.success){
           <div className="flex items-center justify-between mb-6">
             <div className="text-sm text-gray-600">Generated notes — preview mode</div>
             <div className="flex items-center gap-3">
-              {/* Download button: downloads the HTML as .html file (simple fallback) */}
+              {/* PDF Download button (iframe + html2canvas inside iframe; returns PDF via postMessage) */}
               <button
-                onClick={() => {
-                  const blob = new Blob([previewHtml], { type: "text/html" });
-                  const url = URL.createObjectURL(blob);
-                  const a = document.createElement("a");
-                  a.href = url;
-                  a.download = `${(previewTitle || "notes").replace(/\s+/g, "_")}.html`;
-                  document.body.appendChild(a);
-                  a.click();
-                  a.remove();
-                  URL.revokeObjectURL(url);
+                onClick={async () => {
+                  if (!previewHtml) {
+                    showToast("❌ Nothing to export", "error");
+                    return;
+                  }
+
+                  try {
+                    const filename = `${(previewTitle || 'notes').replace(/\s+/g, '_')}.pdf`;
+
+                    // listener to cleanup iframe after work
+                    const onMessage = (ev) => {
+                      try {
+                        const msg = ev.data || {};
+                        if (msg && msg.type === 'html2pdf-done') {
+                          showToast('✅ PDF exported', 'success');
+                        } else if (msg && msg.type === 'html2pdf-error') {
+                          console.error('iframe html2pdf error', msg.error);
+                          showToast('❌ PDF export failed inside iframe', 'error');
+                        }
+                      } finally {
+                        window.removeEventListener('message', onMessage);
+                        try { iframe.remove(); } catch (e) {}
+                      }
+                    };
+
+                    window.addEventListener('message', onMessage);
+
+                    // create hidden iframe with isolated document
+                    const iframe = document.createElement('iframe');
+                    iframe.style.position = 'fixed';
+                    iframe.style.left = '-9999px';
+                    iframe.style.top = '0';
+                    iframe.style.width = '800px';
+                    iframe.style.height = '1122px';
+                    iframe.setAttribute('aria-hidden', 'true');
+                    document.body.appendChild(iframe);
+
+                    const idoc = iframe.contentDocument || iframe.contentWindow.document;
+                    idoc.open();
+                    idoc.write(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:12mm;background:#fff;color:#111827;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial} img{max-width:100%;height:auto}</style></head><body></body></html>`);
+                    idoc.close();
+
+                    // inject content and filename
+                    idoc.body.innerHTML = previewHtml;
+                    idoc.body.setAttribute('data-filename', filename);
+
+                    // inject script that loads html2pdf bundle and runs it
+                    const script = idoc.createElement('script');
+                    script.type = 'text/javascript';
+                    script.textContent = `(function(){
+  function load(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+  // use the html2pdf bundle which includes html2canvas and jsPDF
+  load('https://unpkg.com/html2pdf.js/dist/html2pdf.bundle.min.js').then(function(){
+    try{
+      // normalize computed colors inside iframe to rgb to be safe
+      try{
+        var dummy=document.createElement('div');document.body.appendChild(dummy);
+        Array.from(document.querySelectorAll('*')).forEach(function(el){
+          try{
+            var cs=window.getComputedStyle(el);
+            ['color','backgroundColor','borderTopColor','borderRightColor','borderBottomColor','borderLeftColor'].forEach(function(p){
+              var v=cs[p]; if(!v) return; if(/oklch|lab|lch|color\\(|gradient/i.test(v)){ dummy.style.color=v; var norm=getComputedStyle(dummy).color; if(norm) el.style.setProperty(p.replace(/([A-Z])/g,'-$1').toLowerCase(), norm, 'important'); }
+            });
+            var bgImg=cs.backgroundImage; if(bgImg && bgImg!=='none' && /oklch|lab|lch|color\\(|gradient/i.test(bgImg)){ el.style.setProperty('background-image','none','important'); var bg=cs.backgroundColor; if(bg){ dummy.style.color=bg; var n=getComputedStyle(dummy).color; if(n) el.style.setProperty('background-color', n, 'important'); }}
+          }catch(e){}
+        }); dummy.remove();
+      }catch(e){}
+
+      // run html2pdf on body
+      var opt = { filename: document.body.getAttribute('data-filename') || '${filename}', margin:16, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, html2canvas:{scale:2, useCORS:true, logging:false} };
+      // html2pdf returns a promise-like chain; use callback
+      window.html2pdf().from(document.body).set(opt).save().then(function(){
+        parent.postMessage({type:'html2pdf-done'}, '*');
+      }).catch(function(err){ parent.postMessage({type:'html2pdf-error', error: err && err.message ? err.message : String(err)}, '*'); });
+    }catch(e){ parent.postMessage({type:'html2pdf-error', error: e && e.message ? e.message : String(e)}, '*'); }
+  }).catch(function(err){ parent.postMessage({type:'html2pdf-error', error: err && err.message ? err.message : String(err)}, '*'); });
+})();`;
+                    idoc.body.appendChild(script);
+
+                  } catch (err) {
+                    console.error('PDF export failed setup:', err);
+                    showToast('❌ PDF export failed', 'error');
+                  }
                 }}
                 className="px-3 py-1 rounded-md border border-gray-200 text-sm bg-gray-100 hover:bg-gray-200"
-                aria-label="Download HTML"
-                title="Download HTML (use Print → Save as PDF to export as PDF)"
+                aria-label="Download PDF"
+                title="Download PDF (isolated html2pdf in iframe)"
               >
                 <FaDownload className="inline mr-2" /> Download
               </button>
-            </div>
+           </div>
           </div>
 <div className="relative w-full max-w-3xl">
 
@@ -164,7 +233,8 @@ if(!data.success){
   {/* --- Scrollable content box --- */}
   <div
     className="
-      relative overflow-auto prose prose-lg max-w-none
+      relative overflow-auto 
+      prose prose-lg max-w-none
       px-8 py-6 rounded-xl
       bg-gradient-to-br from-white to-gray-50
       shadow-[0_8px_30px_rgba(0,0,0,0.12)]
@@ -172,6 +242,7 @@ if(!data.success){
       animate-fadeIn
       ml-1  
     "
+    
     style={{
       maxHeight: "calc(65vh - 60px)",
       paddingRight: 16,
@@ -180,6 +251,7 @@ if(!data.success){
 
     {/* HTML injected */}
     <div
+    ref={contentRef}
       dangerouslySetInnerHTML={{ __html: previewHtml }}
       className="relative z-10"
     />

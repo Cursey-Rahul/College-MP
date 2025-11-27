@@ -15,6 +15,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
+    "html2canvas": "^1.4.1",
+    "html2pdf-react": "^0.0.3",
+    "html2pdf.js": "^0.12.1",
+    "jspdf": "^3.0.4",
     "lucide-react": "^0.548.0",
     "motion": "^12.23.24",
     "pdfjs-dist": "^5.4.394",
@@ -23,6 +27,7 @@
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.5",
+    "simple-html2pdf": "^2.1.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "tw-animate-css": "^1.4.0"

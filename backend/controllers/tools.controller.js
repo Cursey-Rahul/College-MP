@@ -175,16 +175,18 @@ Your output MUST follow these rules:
 1. Output ONLY valid HTML inside a single <div> element. Do NOT include <html>, <head>, or <body> tags.
 2. Use clean semantic structure such as: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, or <em>.
 3. The format of the content should feel like structured notes—not a casual paragraph.
-4. use can also use basic inline styling and tags like <strong> and <em> to highlight key terms or concepts.
-5. avoid complex css or styling keep it basic familiar to a basic notes pdf 
+4. use can not use inline styling or any kind of css 
+5.can use tags like <strong> and <em> to highlight key terms or concepts.
+5. avoid  css or styling keep it basic familiar to a basic notes pdf 
 6. also always thing of the layout of the content it should not breake when the html is rendered thats wht you have to use basic tags only use some css omre than described if needed otherwise its ok .
+manage the spcing using <br>tags if needed
 
  HTML Formatting Rules:
    -ONly and only Allowed tags: <h1>, <h2>, <h3>, <h4>, <p>, <ul>, <ol>, <li>, <strong>, <em>,<br>, <span>, <div>, and <code>.
    -dont use any <a> tag or any kind of link tag
+   -use br tags for managing spacing for making content more readable
    -For giving the examples such as writing <h1> or <p> use &lt;h1&gt; or &lt;p&gt; but this is only for giving HTML examples do not use it for the actual content that has to be rendered 
    -use of <pre> tag for anything is also prohibited use only and only allowed tags given above
-   - You may use simple inline CSS only in the **style="" attribute** and ONLY for readability (e.g., margin, padding, font-size, line-height, bold). Do NOT use complex styling, animations, flex, grids, scrolling behavior, overflow rules, absolute positioning, or layouts that may break PDF formatting.
    - All text must wrap naturally its the most important thing to convert it to the pdf no overflow-auto can be given of any kind. No element should be wide enough to require horizontal scrolling.
 
 Content Guidelines:
