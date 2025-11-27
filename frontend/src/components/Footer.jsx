@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full bg-black text-gray-300 py-12 overflow-hidden border-t border-white/5">
+    <footer className="relative w-full bg-black text-gray-300 py-12  overflow-hidden border-t border-white/5">
       {/* 🌈 Soft Glowing Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-blue-500/10 to-purple-500/10 blur-3xl opacity-60"></div>
 
@@ -24,17 +24,17 @@ const Footer = () => {
 
         {/* 📘 Center - Navigation */}
         <nav className="flex flex-wrap justify-center md:justify-end gap-8 text-sm font-medium">
-          <a href="#pdf-generator" className="hover:text-red-400 transition">
-            PDF Generator
-          </a>
-          <a href="#quiz" className="hover:text-blue-400 transition">
-            Quiz
-          </a>
-          <a href="#notes-summarizer" className="hover:text-purple-400 transition">
+          <a href="/pdf" className="hover:text-red-400 transition">
             Notes
           </a>
-          <a href="#contact" className="hover:text-pink-400 transition">
-            Contact
+          <a href="/quiz" className="hover:text-blue-400 transition">
+            Quiz
+          </a>
+          <a href="/notes" className="hover:text-purple-400 transition">
+            Summary
+          </a>
+          <a href="/flashcard" className="hover:text-pink-400 transition">
+            Flashcard
           </a>
         </nav>
       </div>

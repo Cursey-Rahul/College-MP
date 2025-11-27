@@ -58,7 +58,7 @@ headers:{
       
       const data = await res.json().catch(() => null);
 if(!data.success){
-  showToast(message || "❌ Failed to generate summary", "error");
+  showToast(data.message || "❌ Failed to generate summary", "error");
   return
 }
       
@@ -117,7 +117,7 @@ if(!data.success){
 
         {/* PDF-like container */}
         <div
-          className="w-full max-w-4xl p-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30"
+          className="w-full max-w-4xl p-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30 overflow-hidden relative"
           style={{ minHeight: "65vh", boxShadow: "0 20px 60px rgba(0,0,0,0.6)" }}
         >
           {/* toolbar area */}
@@ -242,10 +242,12 @@ if(!data.success){
       animate-fadeIn
       ml-1  
     "
-    
     style={{
       maxHeight: "calc(65vh - 60px)",
       paddingRight: 16,
+      // ensure inner content doesn't escape rounded corners
+      overflow: 'auto',
+      boxSizing: 'border-box'
     }}
   >
 
@@ -253,7 +255,8 @@ if(!data.success){
     <div
     ref={contentRef}
       dangerouslySetInnerHTML={{ __html: previewHtml }}
-      className="relative z-10"
+      className="relative z-10 break-words"
+      style={{ wordBreak: 'break-word' }}
     />
   </div>
 </div>
