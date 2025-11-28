@@ -100,7 +100,7 @@ const FlashcardsPage = () => {
 
             {/* Back */}
             <div className="absolute w-full h-full bg-[#002015]/90 border border-green-400/30 rounded-3xl flex items-center justify-center p-10 md:p-16 backface-hidden rotate-y-180">
-              <p className="text-lg md:text-2xl text-center">{currentCard.description}</p>
+              <p className="text-base md:text-2xl text-center">{currentCard.description}</p>
             </div>
           </Motion.div>
         </div>
@@ -153,7 +153,7 @@ const FlashcardsPage = () => {
 
   // Else → input form
   return (
-    <section className="h-screen bg-gradient-to-br from-[#001a0f] via-[#002b1a] to-[#003322] text-white flex flex-col items-center justify-center px-6 md:px-16 pt-28 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-[#001a0f] via-[#002b1a] to-[#003322] text-white flex flex-col items-center justify-center px-6 md:px-16 pt-28 relative overflow-hidden">
       <div id="toast-container" className="absolute bottom-10 right-10 z-50 space-y-2"></div>
 
       <FaBookOpen className="absolute top-38 left-20 text-emerald-400/20 text-7xl animate-float-slow" />
@@ -181,7 +181,7 @@ const FlashcardsPage = () => {
             placeholder="Enter a topic (e.g., Photosynthesis)"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            className="bg-transparent outline-none w-full text-white text-lg placeholder-gray-500"
+            className="bg-transparent outline-none w-full text-white sm:text-lg placeholder-gray-500"
           />
         </div>
 
@@ -197,7 +197,7 @@ const FlashcardsPage = () => {
         </button>
       </form>
 
-      <p className="mt-0 sm:mt-16 text-sm text-gray-500 text-center tracking-wide">
+      <p className="my-12 text-sm text-gray-500 text-center tracking-wide">
         🌿 Boost your memory ― study smarter, not harder.
       </p>
 

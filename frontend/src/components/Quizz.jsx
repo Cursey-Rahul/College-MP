@@ -16,7 +16,7 @@ const Quizz = () => {
       {/* 💡 Blue Glow */}
       <div className="absolute top-1/2 right-1/4 w-[700px] h-[700px] bg-blue-500/25 blur-[150px] rounded-full -translate-y-1/2 z-0"></div>
 
-      {/* 🌟 Main Content (Right Side) */}
+      {/* 🌟 Main Content */}
   <div className="relative z-10 flex flex-col justify-between 
                 items-start lg:items-end 
                 text-left lg:text-right 

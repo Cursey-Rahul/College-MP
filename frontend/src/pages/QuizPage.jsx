@@ -30,6 +30,7 @@ const QuizPage = () => {
 
     try {
       setLoading(true);
+      console.log(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-mcqs`);
       const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-mcqs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -176,7 +177,7 @@ const QuizPage = () => {
             placeholder="Enter a topic (e.g., Machine Learning)"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            className="bg-transparent outline-none w-full text-white text-lg placeholder-gray-500"
+            className="bg-transparent outline-none w-full text-white sm:text-lg placeholder-gray-500"
           />
         </div>
 

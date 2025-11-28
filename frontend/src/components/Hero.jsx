@@ -10,11 +10,11 @@ const Hero = () => {
   };
 
   return (
-    <div className='w-full min-h-screen relative overflow-hidden'>
+    <div className='w-full h-[550px] md:min-h-screen relative overflow-hidden'>
 
       {/* BACKGROUND VIDEO */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-contain z-0"
+        className="absolute md:top-0 md:left-0 top-20 left-0 w-full h-fit md:h-full object-contain z-0"
         autoPlay
         loop
         muted
@@ -28,16 +28,16 @@ const Hero = () => {
         <Navbar />
       </div>
 
-      {/* MAIN HEADING - untouched */}
-      <div className='absolute mx-auto 2xl:ml-14 xl:w-2/3 w-fit h-screen flex items-center justify-center pointer-events-none top-60 left-10 z-10'>
-        <h1 className='text-white text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-8xl drop-shadow-lg Class Effect'>
+      {/* MAIN HEADING */}
+      <div className='absolute mx-auto 2xl:ml-14 xl:w-2/3 w-fit h-fit flex items-center justify-center pointer-events-none top-78 md:top-140 xl:top-135 2xl:top-155 sm:top-100 left-6 mr-6 z-10'>
+        <h1 className='text-white text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-8xl drop-shadow-lg Class Effect'>
           AI That Supercharges Your Study Time
         </h1>
       </div>
 
-      {/* BUTTONS SECTION - untouched */}
-      <div className='absolute mx-auto 2xl:ml-14 w-fit xl:w-1/3 h-auto flex items-center top-190 2xl:top-210 left-10 justify-between z-10'> 
-        <div className='flex items-center gap-4 text-white text-xs flex-wrap md:flex-nowrap md:text-sm font-light opacity-100'>
+      {/* BUTTONS SECTION*/}
+      <div className='absolute mx-auto 2xl:ml-14 w-fit xl:w-1/3 h-auto flex items-center top-98 md:top-170 xl:top-170 2xl:top-210 left-7 justify-between z-10'> 
+        <div className='flex items-center gap-2 text-white text-xs flex-wrap md:flex-nowrap md:text-sm font-light opacity-100'>
           
           <div className="absolute top-0 right-100 w-[300px] h-[50px] bg-red-500 blur-[70px] rounded-full -translate-y-1/2 z-0 pointer-events-none"></div>
           <div className="absolute top-0 right-60 w-[250px] h-[50px] bg-green-500 blur-[70px] rounded-full -translate-y-1/2 z-0 pointer-events-none"></div>

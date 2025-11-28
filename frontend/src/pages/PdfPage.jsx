@@ -94,7 +94,7 @@ if(!data.success){
       <FaMagic className="absolute top-46 right-32 text-rose-400/30 text-7xl rotate-12 animate-float-rev" />
         {/* toast container (keep) */}
         <div id="toast-container" className="absolute top-50 toast toast-bottom toast-end z-50 space-y-2"></div>
-<div className="w-full flex items-center px-14">
+<div className="w-full flex flex-col items-center mx-4">
         {/* Back button (fixed) */}
         <button
           onClick={handleBackFromPreview}
@@ -104,12 +104,12 @@ if(!data.success){
         </button>
 
         {/* Page header */}
-        <h1 className="w-full mt-3 text-4xl md:text-5xl font-extrabold text-center mb-8 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 animate-shimmer">
+        <h1 className="w-full mt-3 text-3xl md:text-5xl font-extrabold text-center mb-8 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 animate-shimmer">
           Notes: {previewTitle || ""}
         </h1>
 </div>
         {/* PDF-like container */}
-        <div className="w-full max-w-4xl p-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30"
+        <div className="w-full max-w-4xl px-2 py-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30"
              style={{ minHeight: "65vh", boxShadow: "0 20px 60px rgba(0,0,0,0.6)" }}>
           {/* toolbar area */}
           <div className="flex items-center justify-between mb-6">
@@ -205,7 +205,7 @@ if(!data.success){
     {/* HTML injected */}
     <div
       dangerouslySetInnerHTML={{ __html: previewHtml }}
-      className="relative z-10"
+      className="relative z-10 "
     />
   </div>
 </div>
@@ -218,7 +218,7 @@ if(!data.success){
   }
   .animate-fadeIn { animation: fadeIn 0.4s ease-out; }
 
-  .prose h6 , .prose h2, .prose h3,.prose h4 ,.prose h5  {
+  .prose h6 , .prose h1 ,.prose h2, .prose h3,.prose h4 ,.prose h5  {
     font-weight: 700;
     letter-spacing: -0.5px;
     color:black;
@@ -231,6 +231,8 @@ if(!data.success){
     border-bottom: 2px solid #fca5a5;
     padding-bottom: 4px;
     margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.50rem;
   }
 
   
@@ -298,7 +300,7 @@ if(!data.success){
 
   
   return (
-    <section className="h-screen bg-gradient-to-br from-black via-red-950 to-rose-950 text-white flex flex-col items-center justify-center px-6 md:px-16 pt-28 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-black via-red-950 to-rose-950 text-white flex flex-col items-center justify-center px-6 md:px-16 pt-28 relative overflow-hidden">
       {/* 🧃 Toast Container */}
       <div id="toast-container" className="absolute top-50 toast toast-bottom toast-end z-50 space-y-2"></div>
 
@@ -341,7 +343,7 @@ if(!data.success){
             placeholder="Enter a topic (e.g., Quantum Computing)"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            className="bg-transparent outline-none w-full text-white text-lg placeholder-gray-500"
+            className="bg-transparent outline-none w-full text-white sm:text-lg placeholder-gray-500"
           />
         </div>
 
@@ -371,7 +373,7 @@ if(!data.success){
       </form>
 
       {/* Footer */}
-      <p className="mt-0 sm:mt-16 py-4 text-sm text-gray-500 text-center tracking-wide z-10">
+      <p className="my-12 sm:mt-16 py-4 text-sm text-gray-500 text-center tracking-wide z-10">
         ✨ Powered by AI — turn any idea into well-structured notes effortlessly.
       </p>
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
 import { useNavigate } from "react-router-dom";
 
 const Pdfgenerator = () => {

@@ -111,13 +111,13 @@ if(!data.success){
         </button>
 
         {/* Page header (purple theme) */}
-        <h1 className="w-full mt-8 text-4xl md:text-5xl font-extrabold text-center mb-8 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-blue-300 to-pink-300 animate-shimmer">
+        <h1 className="w-full h-fit mt-4 text-3xl md:text-5xl font-extrabold text-center mb-8 leading-snug bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-blue-300 to-pink-300 animate-shimmer">
           Notes: {previewTitle || "Summary"}
         </h1>
 
         {/* PDF-like container */}
         <div
-          className="w-full max-w-4xl p-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30 overflow-hidden relative"
+          className="w-full max-w-4xl px-2 py-6 md:p-12 bg-white text-black rounded-2xl shadow-2xl z-30 overflow-hidden relative"
           style={{ minHeight: "65vh", boxShadow: "0 20px 60px rgba(0,0,0,0.6)" }}
         >
           {/* toolbar area */}
@@ -275,7 +275,7 @@ if(!data.success){
     color: #111827;
   }
 
- .prose h6 , .prose h2, .prose h3,.prose h4 ,.prose h5  {
+ .prose h6 , .prose h1, .prose h2, .prose h3,.prose h4 ,.prose h5  {
     font-weight: 700;
     letter-spacing: -0.5px;
     color:black;
@@ -288,6 +288,8 @@ if(!data.success){
     border-bottom: 2px solid #fca5a5;
     padding-bottom: 4px;
     margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.50rem;
   }
  
 
@@ -295,7 +297,7 @@ if(!data.success){
   .prose p, .prose li {
     color: #1f2937;
     line-height: 1.7;
-    font-size: 1.08rem;
+    font-size: 0.80rem;
   }
 
   .prose ul {
@@ -360,7 +362,7 @@ if(!data.success){
 
   
   return (
-    <section className="h-screen bg-gradient-to-br from-black via-purple-950 to-blue-950 text-white flex flex-col items-center justify-center px-6 md:px-16 pt-24 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-blue-950 text-white flex flex-col items-center justify-center px-6 md:px-16 pt-24 relative overflow-hidden">
       {/* 🧃 Toast Container */}
       <div id="toast-container" className="absolute bottom-10 right-10 toast toast-bottom toast-end z-50 space-y-2"></div>
 
@@ -426,7 +428,7 @@ if(!data.success){
       </form>
 
       {/* 🌌 Footer */}
-      <p className="mt-4 md:mt-16 text-sm text-gray-500 text-center tracking-wide">
+      <p className="my-12 md:mt-16 text-sm text-gray-500 text-center tracking-wide">
         ✨ Upload your study material and let AI do the thinking. ggs
       </p>
 

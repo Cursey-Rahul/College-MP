@@ -1,5 +1,4 @@
 import React from "react";
-import { DottedGlowBackground } from "@/components/ui/dotted-glow-background";
 import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
@@ -9,8 +8,7 @@ const Notes = () => {
       id="notes-summarizer"
       className="relative h-screen w-full flex items-center justify-start bg-black text-white overflow-hidden px-10 sm:px-20"
     >
-      {/* 🟣 Dotted Glow Background */}
-      <DottedGlowBackground />
+
 
       {/* 💜 Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 via-black to-black opacity-90 z-0"></div>
