@@ -7,6 +7,8 @@ import toolsRouter from "./routes/tools.route.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
+import path from "path";
+const _dirname = path.resolve()
 export const gemini = new GoogleGenAI({});
 const app = express();
 const port = process.env.PORT || 3001;
@@ -20,19 +22,17 @@ mongoose
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(
-{
-  origin:"http://localhost:5173",
-  credentials:true
-}
-));
+app.use(cors());
+app.use(express.static(path.join(_dirname,'/Frontend/dist')))
 
 app.use("/api/auth", authRouter);
 app.use("/api/tools", toolsRouter);
 
-app.get("/", (req, res) => {
-  res.send("Hellob  Worhvjvgfyhfujjhldh!");
-});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(_dirname, 'Frontend/dist/index.html'))
+})
+
 
 app.listen(port, () => console.log(`Server running on port ${port}!`));
 

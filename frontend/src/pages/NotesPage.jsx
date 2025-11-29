@@ -47,7 +47,7 @@ const contentRef=useRef();
       
 const extractedText=await extractTextFromPDF(file)
 
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/summarize-text`, {
+      const res = await fetch(`/api/tools/summarize-text`, {
         method: "POST",
 headers:{
   "content-type":"application/json"

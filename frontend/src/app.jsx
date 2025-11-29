@@ -1,9 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
 import HomePage from "./pages/HomePage";
 import NotesPage from "./pages/NotesPage";
 import QuizPage from "./pages/QuizPage";
@@ -17,7 +15,7 @@ const App = () => {
 
   React.useEffect( () => {
     const fetchUser=async ()=>{
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/auth/me`, {
+      const response = await fetch(`/api/auth/me`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -27,8 +25,8 @@ const App = () => {
 
       }
       else{
-        console.log(data);
         setUser(data.data);
+
       }
     }
     fetchUser();

@@ -31,7 +31,7 @@ const FlashcardsPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-flashcards`, {
+      const res = await fetch(`/api/tools/generate-flashcards`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contents:topic}),

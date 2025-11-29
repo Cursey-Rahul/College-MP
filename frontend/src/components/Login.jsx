@@ -21,7 +21,7 @@ const handleSubmit = async (e) => {
   setLoading(true);
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/auth/login`, {
+    const response = await fetch(`/api/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -175,7 +175,7 @@ useEffect(() => {
                 </button>
               </div>
 
-              <p className="text-sm !mt-8 text-center text-gray-500">
+              <p className="text-sm mt-8 text-center text-gray-500">
                 Don't have an account{" "}
                 <button
                   onClick={() => {

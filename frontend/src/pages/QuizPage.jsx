@@ -30,8 +30,7 @@ const QuizPage = () => {
 
     try {
       setLoading(true);
-      console.log(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-mcqs`);
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/tools/generate-mcqs`, {
+      const res = await fetch(`/api/tools/generate-mcqs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic }),

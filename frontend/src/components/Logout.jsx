@@ -9,7 +9,7 @@ const Logout = ({classname,setUser}) => {
 
     const handleSubmit = async () => {
         setloading(true);
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/auth/logout`, {
+        const response = await fetch(`/api/auth/logout`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
