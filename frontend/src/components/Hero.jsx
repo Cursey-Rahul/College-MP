@@ -29,14 +29,14 @@ const Hero = () => {
       </div>
 
       {/* MAIN HEADING */}
-      <div className='absolute mx-auto 2xl:ml-14 xl:w-2/3 w-fit h-fit flex items-center justify-center pointer-events-none top-78 md:top-140 xl:top-135 2xl:top-155 sm:top-100 left-6 mr-6 z-10'>
+      <div className='absolute mx-auto 2xl:ml-14 xl:w-2/3 w-fit h-fit flex items-center justify-center pointer-events-none top-78 md:top-100 xl:top-120 2xl:top-155 sm:top-100 left-6 mr-6 z-10'>
         <h1 className='text-white text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-8xl drop-shadow-lg Class Effect'>
           AI That Supercharges Your Study Time
         </h1>
       </div>
 
       {/* BUTTONS SECTION*/}
-      <div className='absolute mx-auto 2xl:ml-14 w-fit xl:w-1/3 h-auto flex items-center top-98 md:top-170 xl:top-170 2xl:top-210 left-7 justify-between z-10'> 
+      <div className='absolute mx-auto 2xl:ml-14 w-fit xl:w-1/3 h-auto flex items-center top-98 md:top-135 xl:top-160 2xl:top-210 left-7 justify-between z-10'> 
         <div className='flex items-center gap-2 text-white text-xs flex-wrap md:flex-nowrap md:text-sm font-light opacity-100'>
           
           <div className="absolute top-0 right-100 w-[300px] h-[50px] bg-red-500 blur-[70px] rounded-full -translate-y-1/2 z-0 pointer-events-none"></div>
@@ -68,8 +68,8 @@ const Hero = () => {
             Designing Smarter Study Journeys with the Power of AI
           </h6>
           <div className='flex gap-8 mr-17'>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full bg-transparent hover:bg-white hover:text-black transition duration-100">Explore</button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full bg-transparent hover:bg-white hover:text-black transition duration-100">Get Started</button>
+            <button onClick={()=>scrollToSection("tools-overview")} className="border-2 border-white text-white px-8 py-3 rounded-full bg-transparent hover:bg-white hover:text-black transition duration-100">Explore</button>
+            <button onClick={()=>scrollToSection("tools-overview")} className="border-2 border-white text-white px-8 py-3 rounded-full bg-transparent hover:bg-white hover:text-black transition duration-100">Get Started</button>
           </div>
         </div>
       </div>

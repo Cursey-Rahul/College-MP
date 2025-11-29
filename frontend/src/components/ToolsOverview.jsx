@@ -60,6 +60,7 @@ export default function WebsiteBenefits({ benefits }) {
 
   return (
     <section
+    id="tools-overview"
       className="w-full py-24 bg-gradient-to-b from-[#041017] via-[#03110f] to-[#00110f] 
       text-white relative overflow-hidden border-t border-b border-white/10"
     >

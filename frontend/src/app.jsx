@@ -10,19 +10,41 @@ import QuizPage from "./pages/QuizPage";
 import PdfPage from "./pages/PdfPage";
 import Contact from "./pages/Contact";
 import FlashcardsPage from "./pages/FlashcardPage";
-
+import AuthPage  from "./pages/AuthPage";
 
 const App = () => {
+  const [user,setUser]=React.useState(null);
+
+  React.useEffect( () => {
+    const fetchUser=async ()=>{
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/auth/me`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+      if(!data.success) {
+
+      }
+      else{
+        console.log(data);
+        setUser(data.data);
+      }
+    }
+    fetchUser();
+  }, [])
+
   return (
     <div className="w-full min-h-screen bg-black text-white flex flex-col">
-      <Navbar />
+      <Navbar user={user} setUser={setUser}/>
       <Routes>
+        <Route path="/auth" element={user? <HomePage/>:<AuthPage user={user} setUser={setUser}/>}/>
         <Route path="/" element={<HomePage />} />
-        <Route path="/notes" element={<NotesPage />} />
-        <Route path="/quiz" element={<QuizPage />} />
-        <Route path="/pdf" element={<PdfPage />} />
-         <Route path="/flashcard" element={<FlashcardsPage />} />
-         <Route path="/contact" element={<Contact />} />
+        <Route path="/notes" element={!user? <AuthPage user={user} setUser={setUser}/>:<NotesPage />} />
+        <Route path="/quiz" element={!user? <AuthPage user={user} setUser={setUser}/>:<QuizPage />} />
+        <Route path="/pdf" element={!user? <AuthPage user={user} setUser={setUser}/>:<PdfPage />} />
+         <Route path="/flashcard" element={!user? <AuthPage user={user} setUser={setUser}/>:<FlashcardsPage />} />
+         <Route path="/contact" element={!user? <AuthPage user={user} setUser={setUser}/>:<Contact />} />
       </Routes>
       <Footer />
     </div>
