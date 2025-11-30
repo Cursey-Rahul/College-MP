@@ -8,7 +8,7 @@ import QuizPage from "./pages/QuizPage";
 import PdfPage from "./pages/PdfPage";
 import Contact from "./pages/Contact";
 import FlashcardsPage from "./pages/FlashcardPage";
-import AuthPage  from "./pages/AuthPage";
+import AuthPage  from "./pages/Authpage";
 
 const App = () => {
   const [user,setUser]=React.useState(null);
