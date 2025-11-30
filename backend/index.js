@@ -23,14 +23,14 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use(express.static(path.join(_dirname,'/Frontend/dist')))
+app.use(express.static(path.join(_dirname,'/frontend/dist')))
 
 app.use("/api/auth", authRouter);
 app.use("/api/tools", toolsRouter);
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(_dirname, 'Frontend/dist/index.html'))
+    res.sendFile(path.join(_dirname, 'frontend/dist/index.html'))
 })
 
 
