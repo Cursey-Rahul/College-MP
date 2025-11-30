@@ -37,7 +37,7 @@ const Navbar = ({user ,setUser}) => {
          {user&& 
          <div className="flex items-center">
 <UserCircle2Icon  className="inline-block text-white mr-1" />
-           <p>{user.username}</p>
+           <p className="hidden sm:block">{user.username}</p>
          </div>
          }
           {
