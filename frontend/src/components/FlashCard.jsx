@@ -27,7 +27,7 @@ const Flashcard = () => {
         </h2>
 
         <p className="text-base md:text-lg text-gray-300 max-w-2xl opacity-90 leading-relaxed">
-          ✨ Upload your notes or PDFs and let AI generate clean, 
+          ✨ Enter your topic and let AI generate clean, 
           question–answer flashcards for efficient learning and revision.
         </p>
 

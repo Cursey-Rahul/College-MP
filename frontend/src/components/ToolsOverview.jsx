@@ -39,7 +39,7 @@ export default function WebsiteBenefits({ benefits }) {
     {
       key: "adaptive-tests",
       title: "Adaptive Practice Tests",
-      desc: "Generate MCQs tailored to your chosen topic and difficulty level. Test yourself, get instant feedback, and track progress with AI-powered scoring and explanations.",
+      desc: "Generate customized MCQs for any chosen topic. Test yourself, get instant results, and track progress with AI-powered scoring and structured answers.",
       icon: ListChecks,
     },
     {

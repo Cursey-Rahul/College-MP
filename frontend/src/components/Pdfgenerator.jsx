@@ -28,7 +28,7 @@ const Pdfgenerator = () => {
           </h2>
 
           <p className="text-base md:text-lg text-gray-300 max-w-xl">
-            Upload your PDF or enter a topic — and let AI transform it into structured,
+           Enter a topic,chapter details or entire syllabus and let AI transform it into structured,
             easy-to-study notes instantly.
           </p>
 

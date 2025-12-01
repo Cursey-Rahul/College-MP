@@ -28,8 +28,7 @@ const Quizz = () => {
   </h2>
 
   <p className="text-base md:text-lg text-gray-300 max-w-2xl opacity-90 leading-relaxed">
-    ✨ Challenge yourself with AI-powered quizzes that adapt to your level.
-    Track your progress, unlock achievements, and master every concept with ease.
+    ✨ Challenge yourself with AI-powered quizzes built for your topic. Practice regularly, strengthen understanding, and master every concept with ease.
   </p>
 
   {/* Button: Left on mobile → Right on lg */}

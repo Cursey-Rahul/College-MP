@@ -42,11 +42,11 @@ const HeroSection = () => {
              
             <div className="flex flex-wrap items-center gap-1 sm:gap-3 text-white text-xs sm:text-sm font-light mt-2">
               <button onClick={() => scrollToSection('pdf-generator')} className="px-1 py-1">
-                PDF GENERATOR
+                NOTES GENERATOR
               </button>
               <span className="text-white/70">\</span>
               <button onClick={() => scrollToSection('quiz')} className="px-1 py-1">
-                AI POWERED QUIZ
+                AI  QUIZ
               </button>
               <span className="text-white/70">\</span>
               <button onClick={() => scrollToSection('notes-summarizer')} className="px-1 py-1">
