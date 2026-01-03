@@ -9,7 +9,7 @@ const PdfPage = () => {
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
 
-  
+  const [downloading, setDownloading] = useState(false);
   const [previewHtml, setPreviewHtml] = useState(null);
   const [previewTitle, setPreviewTitle] = useState(""); 
   const [error, setError] = useState(null);
@@ -88,7 +88,7 @@ if(!data.success){
   
   if (previewHtml) {
     return (
-      <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-red-950 to-rose-950 text-white px-6 md:px-16 pt-28 relative overflow-auto">
+      <section className="min-h-screen overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-black via-red-950 to-rose-950 text-white px-6 md:px-16 pt-28 relative ">
         <FaBookOpen className="absolute top-58 left-24 text-red-700/30 text-7xl animate-float-slow" />
       <FaRegLightbulb className="absolute bottom-28 left-40 text-yellow-500/25 text-6xl animate-float" />
       <FaMagic className="absolute top-46 right-32 text-rose-400/30 text-7xl rotate-12 animate-float-rev" />
@@ -121,8 +121,9 @@ if(!data.success){
                     showToast('❌ Nothing to export', 'error');
                     return;
                   }
-  
+   setDownloading(true);
                   try {
+                     let iframe = null; 
                     const filename = `${(previewTitle || 'notes').replace(/\s+/g, '_')}.pdf`;
   
                     const onMessage = (ev) => {
@@ -137,12 +138,13 @@ if(!data.success){
                       } finally {
                         window.removeEventListener('message', onMessage);
                         try { iframe.remove(); } catch (e) {}
+                        setDownloading(false); 
                       }
                     };
   
                     window.addEventListener('message', onMessage);
   
-                    const iframe = document.createElement('iframe');
+                    iframe = document.createElement('iframe');
                     iframe.style.position = 'fixed';
                     iframe.style.left = '-9999px';
                     iframe.style.top = '0';
@@ -167,12 +169,24 @@ if(!data.success){
                   } catch (err) {
                     console.error('PDF export failed setup:', err);
                     showToast('❌ PDF export failed', 'error');
+                    setDownloading(false); 
                   }
                 }}
                 className="px-3 py-1 rounded-md border border-gray-200 text-sm bg-gray-100 hover:bg-gray-200"
                 aria-label="Print"
+                 disabled={downloading}
               >
-                Download
+             {downloading ? (
+    <>
+      <svg className="animate-spin h-4 w-4 mr-2 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+      </svg>
+      Exporting...
+    </> 
+  ) : (
+    <>Download</>
+  )}
               </button>
            </div>
           </div>
@@ -187,7 +201,7 @@ if(!data.success){
   {/* --- Scrollable content box --- */}
   <div
     className="
-      relative overflow-auto prose prose-lg max-w-none
+      relative overflow-y-auto prose prose-lg max-w-none
       px-8 py-6 rounded-xl
       bg-gradient-to-br from-white to-gray-50
       shadow-[0_8px_30px_rgba(0,0,0,0.12)]

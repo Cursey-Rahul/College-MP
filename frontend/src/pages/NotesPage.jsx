@@ -6,7 +6,7 @@ const NotesPage = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 const contentRef=useRef();
-  
+  const [downloading, setDownloading] = useState(false);
   const [previewHtml, setPreviewHtml] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [error, setError] = useState(null);
@@ -131,8 +131,10 @@ if(!data.success){
                     showToast("❌ Nothing to export", "error");
                     return;
                   }
-
+  setDownloading(true);
                   try {
+   let iframe = null; 
+
                     const filename = `${(previewTitle || 'notes').replace(/\s+/g, '_')}.pdf`;
 
                     // listener to cleanup iframe after work
@@ -148,13 +150,14 @@ if(!data.success){
                       } finally {
                         window.removeEventListener('message', onMessage);
                         try { iframe.remove(); } catch (e) {}
+                        setDownloading(false);
                       }
                     };
 
                     window.addEventListener('message', onMessage);
 
                     // create hidden iframe with isolated document
-                    const iframe = document.createElement('iframe');
+                     iframe = document.createElement('iframe');
                     iframe.style.position = 'fixed';
                     iframe.style.left = '-9999px';
                     iframe.style.top = '0';
@@ -208,13 +211,25 @@ if(!data.success){
                   } catch (err) {
                     console.error('PDF export failed setup:', err);
                     showToast('❌ PDF export failed', 'error');
+                    setDownloading(false);
                   }
                 }}
                 className="px-3 py-1 rounded-md border border-gray-200 text-sm bg-gray-100 hover:bg-gray-200"
                 aria-label="Download PDF"
                 title="Download PDF (isolated html2pdf in iframe)"
+                disabled={downloading}
               >
-                <FaDownload className="inline mr-2" /> Download
+                 {downloading ? (
+    <>
+      <svg className="animate-spin h-4 w-4 mr-2 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+      </svg>
+      Exporting...
+    </>
+  ) : (
+    <>Download</>
+  )}
               </button>
            </div>
           </div>
@@ -422,7 +437,7 @@ if(!data.success){
           )}
         </button>
         {loading&& <p className="text-gray-300 text-sm text-center italic">
-          please wait for around 2 minutes your notes are being generated
+          please wait for around a minutes your notes are being generated
       </p>}
 
       </form>
