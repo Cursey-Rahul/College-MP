@@ -9,7 +9,9 @@ dotenv.config();
 import { GoogleGenAI } from "@google/genai";
 import path from "path";
 const _dirname = path.resolve()
-export const gemini = new GoogleGenAI({});
+export const gemini = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 const app = express();
 const port = process.env.PORT || 3001;
 
