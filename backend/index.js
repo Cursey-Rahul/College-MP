@@ -15,6 +15,8 @@ export const gemini = new GoogleGenAI({
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.set("trust proxy", 1);
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
